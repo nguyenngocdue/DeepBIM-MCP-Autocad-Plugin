@@ -37,6 +37,7 @@ namespace autocad_mcp_plugin.Core
 
         public bool IsRunning => _isRunning;
         public int Port => _port;
+        public int HttpPort => HTTP_PORT;
 
         private SocketService()
         {
@@ -261,34 +262,94 @@ namespace autocad_mcp_plugin.Core
                 using (client)
                 using (var stream = client.GetStream())
                 {
-                    var buffer = new byte[65536];
-                    int bytesRead = stream.Read(buffer, 0, buffer.Length);
-                    if (bytesRead == 0) return;
+                    // Read HTTP request fully (header + body based on Content-Length)
+                    var buf = new byte[4096];
+                    string requestText = "";
 
-                    string raw = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+                    while (true)
+                    {
+                        int n = stream.Read(buf, 0, buf.Length);
+                        if (n == 0) break;
+                        requestText += Encoding.UTF8.GetString(buf, 0, n);
 
-                    // Extract HTTP body (after \r\n\r\n)
-                    int bodyStart = raw.IndexOf("\r\n\r\n", StringComparison.Ordinal);
-                    string body = bodyStart >= 0 ? raw.Substring(bodyStart + 4) : raw;
+                        int headerEnd = requestText.IndexOf("\r\n\r\n", StringComparison.Ordinal);
+                        if (headerEnd < 0) continue;
 
-                    string responseBody = ProcessJsonRPC(body.Trim());
+                        int contentLength = 0;
+                        foreach (var line in requestText.Substring(0, headerEnd).Split('\n'))
+                        {
+                            if (line.StartsWith("Content-Length:", StringComparison.OrdinalIgnoreCase))
+                                int.TryParse(line.Split(':')[1].Trim(), out contentLength);
+                        }
 
-                    string httpResponse =
-                        "HTTP/1.1 200 OK\r\n" +
-                        "Content-Type: application/json; charset=utf-8\r\n" +
-                        $"Content-Length: {Encoding.UTF8.GetByteCount(responseBody)}\r\n" +
+                        string body = requestText.Substring(headerEnd + 4);
+                        if (body.Length >= contentLength) break;
+                    }
+
+                    // Parse method and path from first line
+                    string firstLine = requestText.Split('\n')[0].Trim();
+                    string[] parts = firstLine.Split(' ');
+                    string method = parts.Length > 0 ? parts[0] : "";
+                    // string path = parts.Length > 1 ? parts[1] : "/";  // reserved for future routing
+
+                    string corsHeaders =
                         "Access-Control-Allow-Origin: *\r\n" +
-                        "Connection: close\r\n\r\n" +
-                        responseBody;
+                        "Access-Control-Allow-Methods: POST, GET, OPTIONS\r\n" +
+                        "Access-Control-Allow-Headers: Content-Type\r\n";
 
-                    byte[] resp = Encoding.UTF8.GetBytes(httpResponse);
-                    stream.Write(resp, 0, resp.Length);
+                    string responseBody;
+                    int statusCode;
+
+                    if (method == "OPTIONS")
+                    {
+                        SendHttpResponse(stream, 204, "", corsHeaders);
+                        return;
+                    }
+                    else if (method == "GET")
+                    {
+                        responseBody = $"{{\"status\":\"running\",\"port\":{_port},\"httpPort\":{HTTP_PORT}}}";
+                        statusCode = 200;
+                    }
+                    else if (method == "POST")
+                    {
+                        int bodyStart = requestText.IndexOf("\r\n\r\n", StringComparison.Ordinal) + 4;
+                        string jsonBody = requestText.Substring(bodyStart);
+                        responseBody = ProcessJsonRPC(jsonBody);
+                        statusCode = 200;
+                    }
+                    else
+                    {
+                        responseBody = "{\"error\":\"Method not allowed\"}";
+                        statusCode = 405;
+                    }
+
+                    SendHttpResponse(stream, statusCode, responseBody, corsHeaders);
                 }
             }
             catch (Exception ex)
             {
                 _logger.Error("HTTP client error: {0}", ex.Message);
             }
+        }
+
+        private void SendHttpResponse(NetworkStream stream, int statusCode, string body, string extraHeaders = "")
+        {
+            byte[] bodyBytes = Encoding.UTF8.GetBytes(body);
+            string statusText = statusCode == 200 ? "OK"
+                : statusCode == 204 ? "No Content"
+                : statusCode == 405 ? "Method Not Allowed"
+                : "Error";
+            string response =
+                $"HTTP/1.1 {statusCode} {statusText}\r\n" +
+                "Content-Type: application/json; charset=utf-8\r\n" +
+                $"Content-Length: {bodyBytes.Length}\r\n" +
+                "Connection: close\r\n" +
+                extraHeaders +
+                "\r\n";
+            byte[] headerBytes = Encoding.UTF8.GetBytes(response);
+            stream.Write(headerBytes, 0, headerBytes.Length);
+            if (bodyBytes.Length > 0)
+                stream.Write(bodyBytes, 0, bodyBytes.Length);
         }
 
         // ── JSON-RPC processing ───────────────────────────────────────────────

@@ -78,3 +78,11 @@ cd installers\msi
 # Build only the MSI (after manual file changes)
 dotnet build DeepBimMCP.AutoCAD.Installer.wixproj --configuration Release /p:ProductVersion=1.0.0
 ```
+ 
+```powershell
+
+dotnet build src\AutoCADMCPPlugin\AutoCADMCPPlugin.csproj --configuration Release
+cd installers\msi
+dotnet build DeepBimMCP.AutoCAD.Installer.wixproj --configuration Release /p:ProductVersion=1.0.0
+
+```

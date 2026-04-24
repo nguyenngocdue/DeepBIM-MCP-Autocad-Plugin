@@ -69,11 +69,19 @@ namespace autocad_mcp_plugin.AutoCAD
             var ed = doc?.Editor;
             if (ed == null) return;
 
-            string status = SocketService.Instance.IsRunning
-                ? $"RUNNING on port {SocketService.Instance.Port}"
-                : "STOPPED";
-
-            ed.WriteMessage($"\n[DeepBim-MCP] Status: {status}\n");
+            if (SocketService.Instance.IsRunning)
+            {
+                ed.WriteMessage(
+                    $"\n[DeepBim-MCP] Status: RUNNING" +
+                    $"\n  TCP  port : {SocketService.Instance.Port}" +
+                    $"\n  HTTP port : {SocketService.Instance.HttpPort}" +
+                    $"\n  GET  http://localhost:{SocketService.Instance.HttpPort}/ → status JSON" +
+                    $"\n  POST http://localhost:{SocketService.Instance.HttpPort}/ → JSON-RPC\n");
+            }
+            else
+            {
+                ed.WriteMessage("\n[DeepBim-MCP] Status: STOPPED\n");
+            }
         }
     }
 }

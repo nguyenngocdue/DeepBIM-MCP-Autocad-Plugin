@@ -52,7 +52,9 @@ namespace autocad_mcp_plugin.AutoCAD
                 // Write status to AutoCAD command line
                 var doc = Application.DocumentManager.MdiActiveDocument;
                 doc?.Editor.WriteMessage(
-                    $"\n[DeepBim-MCP] AutoCAD MCP Plugin loaded. Server listening on port {SocketService.Instance.Port}.\n");
+                    $"\n[DeepBim-MCP] AutoCAD MCP Plugin loaded." +
+                    $"\n  TCP  port : {SocketService.Instance.Port}" +
+                    $"\n  HTTP port : {SocketService.Instance.HttpPort}\n");
             }
             catch (System.Exception ex)
             {
