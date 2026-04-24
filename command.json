@@ -1,0 +1,17 @@
+{
+  "name": "AutoCADMCPCommandSet",
+  "description": "Basic command collection for AutoCAD AI assistance",
+  "developer": {
+    "name": "DeepBim-MCP",
+    "organization": "DeepBim"
+  },
+  "commands": [
+    { "commandName": "say_hello",             "description": "Test command — returns a greeting",                        "assemblyPath": "AutoCADMCPPlugin.dll", "enabled": true },
+    { "commandName": "get_document_info",     "description": "Get info about the current AutoCAD drawing",              "assemblyPath": "AutoCADMCPPlugin.dll", "enabled": true },
+    { "commandName": "get_layers",            "description": "List all layers in the current drawing",                  "assemblyPath": "AutoCADMCPPlugin.dll", "enabled": true },
+    { "commandName": "get_entities",          "description": "Get entities from model space (filter by layer/type)",    "assemblyPath": "AutoCADMCPPlugin.dll", "enabled": true },
+    { "commandName": "create_line",           "description": "Create a line entity in model space",                     "assemblyPath": "AutoCADMCPPlugin.dll", "enabled": true },
+    { "commandName": "write_message",         "description": "Write a message to the AutoCAD command line",             "assemblyPath": "AutoCADMCPPlugin.dll", "enabled": true },
+    { "commandName": "send_code_to_autocad",  "description": "Execute dynamic C# code in the AutoCAD context",         "assemblyPath": "AutoCADMCPPlugin.dll", "enabled": true }
+  ]
+}

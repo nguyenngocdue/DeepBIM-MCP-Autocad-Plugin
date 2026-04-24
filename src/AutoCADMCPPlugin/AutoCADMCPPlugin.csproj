@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <!-- AutoCAD 2024 uses .NET Framework 4.8 -->
+    <TargetFramework>net48</TargetFramework>
+    <RootNamespace>autocad_mcp_plugin</RootNamespace>
+    <AssemblyName>AutoCADMCPPlugin</AssemblyName>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <!-- AutoCAD 2024 install path. Change if installed elsewhere. -->
+  <PropertyGroup>
+    <AutoCADInstallDir Condition="'$(AutoCADInstallDir)'==''">C:\Program Files\Autodesk\AutoCAD 2024</AutoCADInstallDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- AutoCAD .NET managed DLLs — referenced but not copied to output (loaded by AutoCAD at runtime) -->
+    <Reference Include="acdbmgd">
+      <HintPath>$(AutoCADInstallDir)\acdbmgd.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="acmgd">
+      <HintPath>$(AutoCADInstallDir)\acmgd.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="AcCoreMgd">
+      <HintPath>$(AutoCADInstallDir)\AcCoreMgd.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <!-- Microsoft.CSharp required for CodeDomProvider (send_code_to_autocad command) on net48 -->
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+  </ItemGroup>
+</Project>
