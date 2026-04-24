@@ -1,25 +1,29 @@
-using autocad_mcp_plugin.MCP.Interfaces;
+using Autodesk.AutoCAD.ApplicationServices;
 using autocad_mcp_plugin.Models;
 using Newtonsoft.Json.Linq;
 
 namespace autocad_mcp_plugin.Commands
 {
     /// <summary>
-    /// Simple test command — equivalent of say_hello in Revit plugin.
-    /// Does not need document context so it does NOT extend DocumentContextCommandBase.
+    /// Simple test command — shows an alert dialog in AutoCAD.
+    /// Extends DocumentContextCommandBase to marshal onto the AutoCAD main thread.
     /// </summary>
-    public class SayHelloCommand : IAutoCADCommand
+    public class SayHelloCommand : DocumentContextCommandBase
     {
-        public string CommandName => "say_hello";
+        public override string CommandName => "say_hello";
 
-        public object Execute(JObject parameters, string requestId)
+        protected override object ExecuteInDocumentContext(Document doc, JObject parameters)
         {
             string name = parameters?["name"]?.ToString() ?? "World";
+            string message = $"Hello, {name}! AutoCAD MCP Plugin is running.";
+
+            Application.ShowAlertDialog(message);
+
             return new AIResult<string>
             {
                 Success = true,
                 Message = "Hello command executed.",
-                Response = $"Hello, {name}! AutoCAD MCP Plugin is running."
+                Response = message
             };
         }
     }

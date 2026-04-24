@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  AutoCAD Application Bundle Manifest
+  
+  This file tells AutoCAD to automatically load DeepBimAutoCADMCP on startup.
+  It is installed to:
+    C:\ProgramData\Autodesk\ApplicationPlugins\DeepBimAutoCADMCP.bundle\PackageContents.xml
+  
+  AutoCAD discovers bundles in:
+    - C:\ProgramData\Autodesk\ApplicationPlugins\   (all users, this installer)
+    - %APPDATA%\Autodesk\ApplicationPlugins\         (current user)
+  
+  SeriesMin="R24.1" = AutoCAD 2024
+  SeriesMax is omitted to support all future versions
+-->
+<ApplicationPackage SchemaVersion="1.0"
+                    Version="1.0.0"
+                    ProductCode="{B3C4D5E6-F7A8-9012-BCDE-F01234567891}"
+                    Name="DeepBim AutoCAD MCP Plugin"
+                    Description="AutoCAD MCP Plugin — AI Integration via Model Context Protocol"
+                    Author="DeepBim">
+
+  <CompanyDetails Name="DeepBim" URL="" Email="" />
+
+  <RuntimeRequirements OS="Win64" Platform="AutoCAD" SeriesMin="R24.1" />
+
+  <Components Description="DeepBim AutoCAD MCP Plugin">
+    <RuntimeRequirements OS="Win64" Platform="AutoCAD" SeriesMin="R24.1" />
+    <ComponentEntry AppName="DeepBimAutoCADMCP"
+                    Version="1.0.0"
+                    ModuleName="./Contents/AutoCADMCPPlugin.dll"
+                    LoadReasons="Startup" />
+  </Components>
+
+</ApplicationPackage>

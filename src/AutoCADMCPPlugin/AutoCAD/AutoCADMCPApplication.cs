@@ -38,6 +38,17 @@ namespace autocad_mcp_plugin.AutoCAD
                 // Auto-start MCP server on load
                 SocketService.Instance.Start();
 
+                // Create ribbon tab once the AutoCAD UI is ready
+                // Use ComponentManager.ItemInitialized for reliable ribbon detection
+                if (Autodesk.Windows.ComponentManager.Ribbon != null)
+                {
+                    MCPRibbon.CreateRibbon();
+                }
+                else
+                {
+                    Autodesk.Windows.ComponentManager.ItemInitialized += OnRibbonItemInitialized;
+                }
+
                 // Write status to AutoCAD command line
                 var doc = Application.DocumentManager.MdiActiveDocument;
                 doc?.Editor.WriteMessage(
@@ -62,6 +73,13 @@ namespace autocad_mcp_plugin.AutoCAD
                     SocketService.Instance.Stop();
             }
             catch { }
+        }
+
+        private static void OnRibbonItemInitialized(object sender, Autodesk.Windows.RibbonItemEventArgs e)
+        {
+            if (Autodesk.Windows.ComponentManager.Ribbon == null) return;
+            Autodesk.Windows.ComponentManager.ItemInitialized -= OnRibbonItemInitialized;
+            MCPRibbon.CreateRibbon();
         }
     }
 }

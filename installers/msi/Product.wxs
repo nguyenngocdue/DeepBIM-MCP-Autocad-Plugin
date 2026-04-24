@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  DeepBim AutoCAD MCP Plugin — WiX v5 Installer
+  
+  What this installs:
+    1. AutoCAD plugin DLL + deps  →  C:\ProgramData\Autodesk\ApplicationPlugins\DeepBimAutoCADMCP.bundle\
+       - PackageContents.xml  (tells AutoCAD to load the DLL on startup)
+       - Contents\AutoCADMCPPlugin.dll
+       - Contents\Newtonsoft.Json.dll
+       
+    2. Node.js MCP Server  →  %ProgramFiles%\DeepBim\AutoCAD-MCP\server\
+       - build\index.js + all compiled TypeScript files
+       - node_modules\  (production dependencies)
+       - package.json
+       
+    3. Registry key  →  HKLM\SOFTWARE\DeepBim\AutoCAD-MCP
+       - ServerPath  =  path to build\index.js  (for VS Code mcp.json config)
+       - InstallFolder
+-->
+
+<!-- Override these via .wixproj DefineConstants or -d command line flags -->
+<?ifndef ProductVersion ?>
+  <?define ProductVersion = "1.0.0" ?>
+<?endif?>
+<?ifndef PluginBinDir ?>
+  <?define PluginBinDir = "..\..\src\AutoCADMCPPlugin\bin\Release\net48" ?>
+<?endif?>
+<?ifndef ServerBuildDir ?>
+  <?define ServerBuildDir = "..\..\..\..\autocad-mcp-server\build" ?>
+<?endif?>
+<?ifndef ServerNodeModulesDir ?>
+  <?define ServerNodeModulesDir = "..\..\..\..\autocad-mcp-server\node_modules" ?>
+<?endif?>
+<?ifndef ServerSrcDir ?>
+  <?define ServerSrcDir = "..\..\..\..\autocad-mcp-server" ?>
+<?endif?>
+
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+     xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
+
+  <Package Name="DeepBim AutoCAD MCP $(var.ProductVersion)"
+           Version="$(var.ProductVersion)"
+           Manufacturer="DeepBim"
+           UpgradeCode="{E7A5F29B-4C83-4D1E-93B7-6F0A8D2C5E14}"
+           InstallerVersion="500"
+           Scope="perMachine">
+
+    <SummaryInformation Description="DeepBim AutoCAD MCP Plugin — AI Integration for AutoCAD" />
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MediaTemplate EmbedCab="yes" />
+
+    <!-- ================================================================ -->
+    <!-- Directories                                                       -->
+    <!-- ================================================================ -->
+
+    <!-- %ProgramFiles%\DeepBim\AutoCAD-MCP\ — MCP server -->
+    <StandardDirectory Id="ProgramFiles64Folder">
+      <Directory Id="DIR_DeepBim" Name="DeepBim">
+        <Directory Id="INSTALLFOLDER" Name="AutoCAD-MCP">
+          <Directory Id="DIR_Server" Name="server">
+            <Directory Id="DIR_Server_build" Name="build">
+              <Directory Id="DIR_Server_tools" Name="tools" />
+              <Directory Id="DIR_Server_utils" Name="utils" />
+            </Directory>
+            <Directory Id="DIR_Server_node_modules" Name="node_modules" />
+          </Directory>
+        </Directory>
+      </Directory>
+    </StandardDirectory>
+
+    <!-- C:\ProgramData\Autodesk\ApplicationPlugins\ — AutoCAD bundle (auto-load on startup) -->
+    <StandardDirectory Id="CommonAppDataFolder">
+      <Directory Id="DIR_Autodesk" Name="Autodesk">
+        <Directory Id="DIR_AppPlugins" Name="ApplicationPlugins">
+          <Directory Id="DIR_Bundle" Name="DeepBimAutoCADMCP.bundle">
+            <Directory Id="DIR_BundleContents" Name="Contents" />
+          </Directory>
+        </Directory>
+      </Directory>
+    </StandardDirectory>
+
+    <!-- ================================================================ -->
+    <!-- Components — AutoCAD Plugin                                       -->
+    <!-- ================================================================ -->
+
+    <ComponentGroup Id="AutoCADPluginFiles" Directory="DIR_BundleContents">
+      <Component Id="Comp_Plugin_DLL" Guid="*">
+        <File Source="$(var.PluginBinDir)\AutoCADMCPPlugin.dll" KeyPath="yes" />
+      </Component>
+      <Component Id="Comp_Plugin_NewtonsoftJson" Guid="*">
+        <File Source="$(var.PluginBinDir)\Newtonsoft.Json.dll" KeyPath="yes" />
+      </Component>
+    </ComponentGroup>
+
+    <!-- PackageContents.xml tells AutoCAD to auto-load the plugin on startup -->
+    <Component Id="Comp_PackageContents" Directory="DIR_Bundle" Guid="*">
+      <File Source="PackageContents.xml" KeyPath="yes" />
+    </Component>
+
+    <!-- ================================================================ -->
+    <!-- Components — MCP Server                                           -->
+    <!-- ================================================================ -->
+
+    <Component Id="Comp_ServerPackageJson" Directory="DIR_Server" Guid="*">
+      <File Source="$(var.ServerSrcDir)\package.json" KeyPath="yes" />
+    </Component>
+
+    <!-- ================================================================ -->
+    <!-- Components — Registry                                             -->
+    <!-- ================================================================ -->
+
+    <!-- Store install paths in registry so users can configure VS Code   -->
+    <!-- VS Code mcp.json: "args": ["<ServerPath>"]                       -->
+    <Component Id="Comp_Registry" Directory="INSTALLFOLDER" Guid="*">
+      <RegistryValue Root="HKLM"
+                     Key="SOFTWARE\DeepBim\AutoCAD-MCP"
+                     Name="ServerPath"
+                     Value="[DIR_Server_build]index.js"
+                     Type="string"
+                     KeyPath="yes" />
+      <RegistryValue Root="HKLM"
+                     Key="SOFTWARE\DeepBim\AutoCAD-MCP"
+                     Name="InstallFolder"
+                     Value="[INSTALLFOLDER]"
+                     Type="string" />
+      <RegistryValue Root="HKLM"
+                     Key="SOFTWARE\DeepBim\AutoCAD-MCP"
+                     Name="Version"
+                     Value="$(var.ProductVersion)"
+                     Type="string" />
+    </Component>
+
+    <!-- ================================================================ -->
+    <!-- Feature                                                           -->
+    <!-- ================================================================ -->
+
+    <Feature Id="ProductFeature"
+             Title="DeepBim AutoCAD MCP Plugin"
+             Description="Installs the AutoCAD MCP Plugin and Node.js MCP Server."
+             Level="1">
+      <ComponentGroupRef Id="AutoCADPluginFiles" />
+      <ComponentGroupRef Id="ServerBuildFiles" />
+      <ComponentGroupRef Id="ServerNodeModulesFiles" />
+      <ComponentRef Id="Comp_PackageContents" />
+      <ComponentRef Id="Comp_ServerPackageJson" />
+      <ComponentRef Id="Comp_Registry" />
+    </Feature>
+
+    <!-- ================================================================ -->
+    <!-- UI                                                                -->
+    <!-- ================================================================ -->
+
+    <ui:WixUI Id="WixUI_InstallDir" InstallDirectory="INSTALLFOLDER" />
+
+  </Package>
+</Wix>

@@ -26,10 +26,21 @@
       <HintPath>$(AutoCADInstallDir)\acmgd.dll</HintPath>
       <Private>false</Private>
     </Reference>
+    <Reference Include="AdWindows">
+      <HintPath>$(AutoCADInstallDir)\AdWindows.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
     <Reference Include="AcCoreMgd">
       <HintPath>$(AutoCADInstallDir)\AcCoreMgd.dll</HintPath>
       <Private>false</Private>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- WPF assemblies required for Ribbon (System.Windows.Media, ImageSource, etc.) -->
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
 
   <ItemGroup>
