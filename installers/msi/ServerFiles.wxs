@@ -5,136 +5,460 @@
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
   <Fragment>
     <ComponentGroup Id="ServerBuildFiles">
-      <Component Id="SrvComp_index_d_ts" Directory="DIR_Server_build" Guid="*">
+      <Component Id="SrvComp_index_d_ts" Directory="DIR_Server_build" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\index.d.ts" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_index_d_ts_map" Directory="DIR_Server_build" Guid="*">
+      <Component Id="SrvComp_index_d_ts_map" Directory="DIR_Server_build" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\index.d.ts.map" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_index_js" Directory="DIR_Server_build" Guid="*">
+      <Component Id="SrvComp_index_js" Directory="DIR_Server_build" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\index.js" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_index_js_map" Directory="DIR_Server_build" Guid="*">
+      <Component Id="SrvComp_index_js_map" Directory="DIR_Server_build" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\index.js.map" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_tools_create_line_d_ts" Directory="DIR_Server_tools" Guid="*">
+      <Component Id="SrvComp_tools_copy_entity_d_ts" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\copy_entity.d.ts" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_copy_entity_d_ts_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\copy_entity.d.ts.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_copy_entity_js" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\copy_entity.js" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_copy_entity_js_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\copy_entity.js.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_create_arc_d_ts" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\create_arc.d.ts" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_create_arc_d_ts_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\create_arc.d.ts.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_create_arc_js" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\create_arc.js" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_create_arc_js_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\create_arc.js.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_create_circle_d_ts" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\create_circle.d.ts" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_create_circle_d_ts_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\create_circle.d.ts.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_create_circle_js" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\create_circle.js" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_create_circle_js_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\create_circle.js.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_create_layer_d_ts" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\create_layer.d.ts" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_create_layer_d_ts_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\create_layer.d.ts.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_create_layer_js" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\create_layer.js" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_create_layer_js_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\create_layer.js.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_create_line_d_ts" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\tools\create_line.d.ts" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_tools_create_line_d_ts_map" Directory="DIR_Server_tools" Guid="*">
+      <Component Id="SrvComp_tools_create_line_d_ts_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\tools\create_line.d.ts.map" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_tools_create_line_js" Directory="DIR_Server_tools" Guid="*">
+      <Component Id="SrvComp_tools_create_line_js" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\tools\create_line.js" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_tools_create_line_js_map" Directory="DIR_Server_tools" Guid="*">
+      <Component Id="SrvComp_tools_create_line_js_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\tools\create_line.js.map" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_tools_get_document_info_d_ts" Directory="DIR_Server_tools" Guid="*">
+      <Component Id="SrvComp_tools_create_polyline_d_ts" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\create_polyline.d.ts" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_create_polyline_d_ts_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\create_polyline.d.ts.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_create_polyline_js" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\create_polyline.js" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_create_polyline_js_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\create_polyline.js.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_create_rectangle_d_ts" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\create_rectangle.d.ts" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_create_rectangle_d_ts_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\create_rectangle.d.ts.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_create_rectangle_js" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\create_rectangle.js" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_create_rectangle_js_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\create_rectangle.js.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_create_text_d_ts" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\create_text.d.ts" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_create_text_d_ts_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\create_text.d.ts.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_create_text_js" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\create_text.js" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_create_text_js_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\create_text.js.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_delete_entity_d_ts" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\delete_entity.d.ts" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_delete_entity_d_ts_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\delete_entity.d.ts.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_delete_entity_js" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\delete_entity.js" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_delete_entity_js_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\delete_entity.js.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_delete_layer_d_ts" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\delete_layer.d.ts" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_delete_layer_d_ts_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\delete_layer.d.ts.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_delete_layer_js" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\delete_layer.js" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_delete_layer_js_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\delete_layer.js.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_explode_block_d_ts" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\explode_block.d.ts" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_explode_block_d_ts_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\explode_block.d.ts.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_explode_block_js" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\explode_block.js" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_explode_block_js_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\explode_block.js.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_export_dxf_d_ts" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\export_dxf.d.ts" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_export_dxf_d_ts_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\export_dxf.d.ts.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_export_dxf_js" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\export_dxf.js" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_export_dxf_js_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\export_dxf.js.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_export_pdf_d_ts" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\export_pdf.d.ts" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_export_pdf_d_ts_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\export_pdf.d.ts.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_export_pdf_js" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\export_pdf.js" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_export_pdf_js_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\export_pdf.js.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_get_blocks_d_ts" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\get_blocks.d.ts" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_get_blocks_d_ts_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\get_blocks.d.ts.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_get_blocks_js" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\get_blocks.js" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_get_blocks_js_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\get_blocks.js.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_get_bounding_box_d_ts" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\get_bounding_box.d.ts" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_get_bounding_box_d_ts_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\get_bounding_box.d.ts.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_get_bounding_box_js" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\get_bounding_box.js" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_get_bounding_box_js_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\get_bounding_box.js.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_get_document_info_d_ts" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\tools\get_document_info.d.ts" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_tools_get_document_info_d_ts_map" Directory="DIR_Server_tools" Guid="*">
+      <Component Id="SrvComp_tools_get_document_info_d_ts_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\tools\get_document_info.d.ts.map" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_tools_get_document_info_js" Directory="DIR_Server_tools" Guid="*">
+      <Component Id="SrvComp_tools_get_document_info_js" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\tools\get_document_info.js" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_tools_get_document_info_js_map" Directory="DIR_Server_tools" Guid="*">
+      <Component Id="SrvComp_tools_get_document_info_js_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\tools\get_document_info.js.map" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_tools_get_entities_d_ts" Directory="DIR_Server_tools" Guid="*">
+      <Component Id="SrvComp_tools_get_entities_d_ts" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\tools\get_entities.d.ts" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_tools_get_entities_d_ts_map" Directory="DIR_Server_tools" Guid="*">
+      <Component Id="SrvComp_tools_get_entities_d_ts_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\tools\get_entities.d.ts.map" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_tools_get_entities_js" Directory="DIR_Server_tools" Guid="*">
+      <Component Id="SrvComp_tools_get_entities_js" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\tools\get_entities.js" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_tools_get_entities_js_map" Directory="DIR_Server_tools" Guid="*">
+      <Component Id="SrvComp_tools_get_entities_js_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\tools\get_entities.js.map" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_tools_get_layers_d_ts" Directory="DIR_Server_tools" Guid="*">
+      <Component Id="SrvComp_tools_get_entity_properties_d_ts" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\get_entity_properties.d.ts" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_get_entity_properties_d_ts_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\get_entity_properties.d.ts.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_get_entity_properties_js" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\get_entity_properties.js" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_get_entity_properties_js_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\get_entity_properties.js.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_get_layers_d_ts" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\tools\get_layers.d.ts" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_tools_get_layers_d_ts_map" Directory="DIR_Server_tools" Guid="*">
+      <Component Id="SrvComp_tools_get_layers_d_ts_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\tools\get_layers.d.ts.map" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_tools_get_layers_js" Directory="DIR_Server_tools" Guid="*">
+      <Component Id="SrvComp_tools_get_layers_js" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\tools\get_layers.js" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_tools_get_layers_js_map" Directory="DIR_Server_tools" Guid="*">
+      <Component Id="SrvComp_tools_get_layers_js_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\tools\get_layers.js.map" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_tools_register_d_ts" Directory="DIR_Server_tools" Guid="*">
+      <Component Id="SrvComp_tools_insert_block_d_ts" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\insert_block.d.ts" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_insert_block_d_ts_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\insert_block.d.ts.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_insert_block_js" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\insert_block.js" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_insert_block_js_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\insert_block.js.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_measure_area_d_ts" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\measure_area.d.ts" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_measure_area_d_ts_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\measure_area.d.ts.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_measure_area_js" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\measure_area.js" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_measure_area_js_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\measure_area.js.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_measure_distance_d_ts" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\measure_distance.d.ts" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_measure_distance_d_ts_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\measure_distance.d.ts.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_measure_distance_js" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\measure_distance.js" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_measure_distance_js_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\measure_distance.js.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_mirror_entity_d_ts" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\mirror_entity.d.ts" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_mirror_entity_d_ts_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\mirror_entity.d.ts.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_mirror_entity_js" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\mirror_entity.js" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_mirror_entity_js_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\mirror_entity.js.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_move_entity_d_ts" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\move_entity.d.ts" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_move_entity_d_ts_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\move_entity.d.ts.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_move_entity_js" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\move_entity.js" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_move_entity_js_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\move_entity.js.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_register_d_ts" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\tools\register.d.ts" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_tools_register_d_ts_map" Directory="DIR_Server_tools" Guid="*">
+      <Component Id="SrvComp_tools_register_d_ts_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\tools\register.d.ts.map" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_tools_register_js" Directory="DIR_Server_tools" Guid="*">
+      <Component Id="SrvComp_tools_register_js" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\tools\register.js" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_tools_register_js_map" Directory="DIR_Server_tools" Guid="*">
+      <Component Id="SrvComp_tools_register_js_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\tools\register.js.map" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_tools_say_hello_d_ts" Directory="DIR_Server_tools" Guid="*">
+      <Component Id="SrvComp_tools_rotate_entity_d_ts" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\rotate_entity.d.ts" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_rotate_entity_d_ts_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\rotate_entity.d.ts.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_rotate_entity_js" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\rotate_entity.js" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_rotate_entity_js_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\rotate_entity.js.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_say_hello_d_ts" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\tools\say_hello.d.ts" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_tools_say_hello_d_ts_map" Directory="DIR_Server_tools" Guid="*">
+      <Component Id="SrvComp_tools_say_hello_d_ts_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\tools\say_hello.d.ts.map" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_tools_say_hello_js" Directory="DIR_Server_tools" Guid="*">
+      <Component Id="SrvComp_tools_say_hello_js" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\tools\say_hello.js" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_tools_say_hello_js_map" Directory="DIR_Server_tools" Guid="*">
+      <Component Id="SrvComp_tools_say_hello_js_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\tools\say_hello.js.map" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_tools_send_code_to_autocad_d_ts" Directory="DIR_Server_tools" Guid="*">
+      <Component Id="SrvComp_tools_scale_entity_d_ts" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\scale_entity.d.ts" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_scale_entity_d_ts_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\scale_entity.d.ts.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_scale_entity_js" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\scale_entity.js" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_scale_entity_js_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\scale_entity.js.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_send_code_to_autocad_d_ts" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\tools\send_code_to_autocad.d.ts" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_tools_send_code_to_autocad_d_ts_map" Directory="DIR_Server_tools" Guid="*">
+      <Component Id="SrvComp_tools_send_code_to_autocad_d_ts_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\tools\send_code_to_autocad.d.ts.map" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_tools_send_code_to_autocad_js" Directory="DIR_Server_tools" Guid="*">
+      <Component Id="SrvComp_tools_send_code_to_autocad_js" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\tools\send_code_to_autocad.js" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_tools_send_code_to_autocad_js_map" Directory="DIR_Server_tools" Guid="*">
+      <Component Id="SrvComp_tools_send_code_to_autocad_js_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\tools\send_code_to_autocad.js.map" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_tools_write_message_d_ts" Directory="DIR_Server_tools" Guid="*">
+      <Component Id="SrvComp_tools_set_current_layer_d_ts" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\set_current_layer.d.ts" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_set_current_layer_d_ts_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\set_current_layer.d.ts.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_set_current_layer_js" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\set_current_layer.js" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_set_current_layer_js_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\set_current_layer.js.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_set_layer_visibility_d_ts" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\set_layer_visibility.d.ts" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_set_layer_visibility_d_ts_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\set_layer_visibility.d.ts.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_set_layer_visibility_js" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\set_layer_visibility.js" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_set_layer_visibility_js_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\set_layer_visibility.js.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_show_dialog_d_ts" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\show_dialog.d.ts" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_show_dialog_d_ts_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\show_dialog.d.ts.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_show_dialog_js" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\show_dialog.js" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_show_dialog_js_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\show_dialog.js.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_write_message_d_ts" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\tools\write_message.d.ts" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_tools_write_message_d_ts_map" Directory="DIR_Server_tools" Guid="*">
+      <Component Id="SrvComp_tools_write_message_d_ts_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\tools\write_message.d.ts.map" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_tools_write_message_js" Directory="DIR_Server_tools" Guid="*">
+      <Component Id="SrvComp_tools_write_message_js" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\tools\write_message.js" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_tools_write_message_js_map" Directory="DIR_Server_tools" Guid="*">
+      <Component Id="SrvComp_tools_write_message_js_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\tools\write_message.js.map" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_utils_ConnectionManager_d_ts" Directory="DIR_Server_utils" Guid="*">
+      <Component Id="SrvComp_tools_zoom_extents_d_ts" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\zoom_extents.d.ts" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_zoom_extents_d_ts_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\zoom_extents.d.ts.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_zoom_extents_js" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\zoom_extents.js" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_tools_zoom_extents_js_map" Directory="DIR_Server_tools" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\tools\zoom_extents.js.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_utils_AutoCADHttpClient_d_ts" Directory="DIR_Server_utils" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\utils\AutoCADHttpClient.d.ts" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_utils_AutoCADHttpClient_d_ts_map" Directory="DIR_Server_utils" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\utils\AutoCADHttpClient.d.ts.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_utils_AutoCADHttpClient_js" Directory="DIR_Server_utils" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\utils\AutoCADHttpClient.js" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_utils_AutoCADHttpClient_js_map" Directory="DIR_Server_utils" Guid="*" Bitness="always64">
+        <File Source="$(var.ServerBuildDir)\utils\AutoCADHttpClient.js.map" KeyPath="yes" />
+      </Component>
+      <Component Id="SrvComp_utils_ConnectionManager_d_ts" Directory="DIR_Server_utils" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\utils\ConnectionManager.d.ts" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_utils_ConnectionManager_d_ts_map" Directory="DIR_Server_utils" Guid="*">
+      <Component Id="SrvComp_utils_ConnectionManager_d_ts_map" Directory="DIR_Server_utils" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\utils\ConnectionManager.d.ts.map" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_utils_ConnectionManager_js" Directory="DIR_Server_utils" Guid="*">
+      <Component Id="SrvComp_utils_ConnectionManager_js" Directory="DIR_Server_utils" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\utils\ConnectionManager.js" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_utils_ConnectionManager_js_map" Directory="DIR_Server_utils" Guid="*">
+      <Component Id="SrvComp_utils_ConnectionManager_js_map" Directory="DIR_Server_utils" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\utils\ConnectionManager.js.map" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_utils_SocketClient_d_ts" Directory="DIR_Server_utils" Guid="*">
+      <Component Id="SrvComp_utils_SocketClient_d_ts" Directory="DIR_Server_utils" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\utils\SocketClient.d.ts" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_utils_SocketClient_d_ts_map" Directory="DIR_Server_utils" Guid="*">
+      <Component Id="SrvComp_utils_SocketClient_d_ts_map" Directory="DIR_Server_utils" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\utils\SocketClient.d.ts.map" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_utils_SocketClient_js" Directory="DIR_Server_utils" Guid="*">
+      <Component Id="SrvComp_utils_SocketClient_js" Directory="DIR_Server_utils" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\utils\SocketClient.js" KeyPath="yes" />
       </Component>
-      <Component Id="SrvComp_utils_SocketClient_js_map" Directory="DIR_Server_utils" Guid="*">
+      <Component Id="SrvComp_utils_SocketClient_js_map" Directory="DIR_Server_utils" Guid="*" Bitness="always64">
         <File Source="$(var.ServerBuildDir)\utils\SocketClient.js.map" KeyPath="yes" />
       </Component>
     </ComponentGroup>

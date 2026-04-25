@@ -109,7 +109,7 @@
     <!-- Components — MCP Server                                           -->
     <!-- ================================================================ -->
 
-    <Component Id="Comp_ServerPackageJson" Directory="DIR_Server" Guid="*">
+    <Component Id="Comp_ServerPackageJson" Directory="DIR_Server" Guid="*" Bitness="always64">
       <File Source="$(var.ServerSrcDir)\package.json" KeyPath="yes" />
     </Component>
 
@@ -119,7 +119,7 @@
 
     <!-- Store install paths in registry so users can configure VS Code   -->
     <!-- VS Code mcp.json: "args": ["<ServerPath>"]                       -->
-    <Component Id="Comp_Registry" Directory="INSTALLFOLDER" Guid="*">
+    <Component Id="Comp_Registry" Directory="INSTALLFOLDER" Guid="*" Bitness="always64">
       <RegistryValue Root="HKLM"
                      Key="SOFTWARE\DeepBim\AutoCAD-MCP"
                      Name="ServerPath"

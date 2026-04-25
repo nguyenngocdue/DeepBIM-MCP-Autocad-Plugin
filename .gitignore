@@ -9,6 +9,7 @@
 bin/
 obj/
 build_output.txt
+installers/msi/output/
 
 # NuGet
 *.nupkg

@@ -9,6 +9,9 @@
 
     <!-- Output MSI name -->
     <OutputName>DeepBimMCP-AutoCAD$(AutoCADVersion)-v$(ProductVersion)</OutputName>
+    <OutputPath>$(MSBuildProjectDirectory)\output\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\AutoCAD$(AutoCADVersion)-v$(ProductVersion)\</IntermediateOutputPath>
+    <InstallerPlatform>x64</InstallerPlatform>
 
     <!-- Source directories passed as WiX preprocessor variables.        -->
     <!-- Paths are relative to THIS .wixproj file location.              -->

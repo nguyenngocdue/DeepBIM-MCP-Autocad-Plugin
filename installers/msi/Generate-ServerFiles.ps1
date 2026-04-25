@@ -58,7 +58,7 @@ foreach ($file in $files) {
     $wixSource  = '$(var.ServerBuildDir)\' + $relPath
 
     $components.Add(@"
-      <Component Id="$safeId" Directory="$dirId" Guid="*">
+      <Component Id="$safeId" Directory="$dirId" Guid="*" Bitness="always64">
         <File Source="$wixSource" KeyPath="yes" />
       </Component>
 "@)
