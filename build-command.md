@@ -1,88 +1,44 @@
-# Build MSI — DeepBim AutoCAD MCP Plugin
+# Build & Install — AutoCAD MCP Plugin
 
-## Prerequisites
-
-1. **WiX Toolset v5** — install via `dotnet`:
-   ```powershell
-   dotnet tool install --global wix --version 5.0.2
-   wix extension add WixToolset.UI.wixext/5.0.2
-   ```
-
-2. **Node.js** — required for `npm run build` and `npm prune`
-
-3. **AutoCAD 2024** installed at `C:\Program Files\Autodesk\AutoCAD 2024\` (for C# build)
-
-## Commands
+## 1. Build C# Plugin
 
 ```powershell
-# Standard build (full pipeline)
+dotnet clean src/AutoCADMCPPlugin/AutoCADMCPPlugin.csproj; dotnet build src/AutoCADMCPPlugin/AutoCADMCPPlugin.csproj -c Release 2>&1 | tee src/AutoCADMCPPlugin/build_output.txt
+```
+
+## 2. Build MSI
+
+```powershell
+cd installers\msi
+dotnet build DeepBimMCP.AutoCAD.Installer.wixproj --configuration Release /p:ProductVersion=1.0.0
+```
+
+Output: `installers\msi\output\DeepBimMCP-AutoCAD-v1.0.0.msi`
+
+## 3. Install
+
+> Close AutoCAD first.
+
+```powershell
+msiexec /i "installers\msi\output\DeepBimMCP-AutoCAD-v1.0.0.msi"
+```
+
+After installing, update `.vscode/mcp.json`:
+```json
+{ "servers": { "autocad": { "type": "stdio", "command": "node", "args": ["C:\\Program Files\\DeepBim\\AutoCAD-MCP\\server\\build\\index.js"] } } }
+```
+
+---
+
+## Extras
+
+```powershell
+# Full pipeline (build C# + server + MSI)
 .\installers\msi\Build-Installer.ps1
 
-# With specific version number
-.\installers\msi\Build-Installer.ps1 -ProductVersion 1.2.0
+# Uninstall
+msiexec /x "installers\msi\output\DeepBimMCP-AutoCAD-v1.0.0.msi" /qn
 
-# Skip rebuilding plugin + server (use existing build output)
-.\installers\msi\Build-Installer.ps1 -ProductVersion 1.0.0 -SkipBuild
-
-# Skip npm prune (keep devDependencies in node_modules)
-.\installers\msi\Build-Installer.ps1 -SkipNpmPrune
-```
-
-## Output
-
-```
-autocad-addin\installers\msi\output\
-    DeepBimMCP-AutoCAD-v1.0.0.msi
-```
-
-## What Gets Installed
-
-| What | Where |
-|------|-------|
-| AutoCAD plugin DLL | `C:\ProgramData\Autodesk\ApplicationPlugins\DeepBimAutoCADMCP.bundle\Contents\` |
-| PackageContents.xml | `C:\ProgramData\Autodesk\ApplicationPlugins\DeepBimAutoCADMCP.bundle\` |
-| Node.js MCP server | `%ProgramFiles%\DeepBim\AutoCAD-MCP\server\` |
-| Registry paths | `HKLM\SOFTWARE\DeepBim\AutoCAD-MCP\ServerPath` |
-
-## Post-Install VS Code Config
-
-After installing the MSI, update `.vscode/mcp.json`:
-
-```json
-{
-  "servers": {
-    "autocad": {
-      "type": "stdio",
-      "command": "node",
-      "args": ["C:\\Program Files\\DeepBim\\AutoCAD-MCP\\server\\build\\index.js"]
-    }
-  }
-}
-```
-
-> Tip: The exact path is stored in `HKLM\SOFTWARE\DeepBim\AutoCAD-MCP\ServerPath`
-
-## Manual WiX Steps (if needed)
-
-//cd "E:\C# Tool Revit\revit-mcp\mcp-addin\autocad-addin"
-
-```powershell
-cd installers\msi
-
-# Regenerate ServerFiles.wxs after server changes
-.\Generate-ServerFiles.ps1
-
-# Regenerate ServerNodeModules.wxs after npm install/update
-.\Generate-ServerNodeModules.ps1
-
-# Build only the MSI (after manual file changes)
-dotnet build DeepBimMCP.AutoCAD.Installer.wixproj --configuration Release /p:ProductVersion=1.0.0
-```
- 
-```powershell
-
-dotnet build src\AutoCADMCPPlugin\AutoCADMCPPlugin.csproj --configuration Release
-cd installers\msi
-dotnet build DeepBimMCP.AutoCAD.Installer.wixproj --configuration Release /p:ProductVersion=1.0.0
-
+# Check build errors
+Select-String -Path src/AutoCADMCPPlugin/build_output.txt -Pattern "error CS|Error"
 ```

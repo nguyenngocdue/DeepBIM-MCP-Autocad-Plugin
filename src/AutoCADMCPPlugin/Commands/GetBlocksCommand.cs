@@ -23,12 +23,15 @@ namespace autocad_mcp_plugin.Commands
                     var btr = (BlockTableRecord)tr.GetObject(id, OpenMode.ForRead);
                     if (btr.IsLayout || btr.IsAnonymous) continue;
 
+                    int count = 0;
+                    foreach (ObjectId _ in btr) count++;
+
                     blocks.Add(new
                     {
-                        name        = btr.Name,
-                        entityCount = btr.Count,
+                        name          = btr.Name,
+                        entityCount   = count,
                         hasAttributes = btr.HasAttributeDefinitions,
-                        origin      = new { x = btr.Origin.X, y = btr.Origin.Y, z = btr.Origin.Z }
+                        origin        = new { x = btr.Origin.X, y = btr.Origin.Y, z = btr.Origin.Z }
                     });
                 }
                 tr.Commit();
