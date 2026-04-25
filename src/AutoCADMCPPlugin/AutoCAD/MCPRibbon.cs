@@ -1,9 +1,8 @@
 using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.Runtime;
 using Autodesk.Windows;
+using autocad_mcp_plugin.Utils;
 using System;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 
 namespace autocad_mcp_plugin.AutoCAD
 {
@@ -53,7 +52,7 @@ namespace autocad_mcp_plugin.AutoCAD
                     label:   "Start MCP",
                     tooltip: "Start the DeepBim MCP Server (MCPSTART)",
                     command: "MCPSTART",
-                    color:   Colors.LimeGreen));
+                    kind:    "start"));
 
                 rowStart.Items.Add(new RibbonRowBreak());
 
@@ -62,7 +61,7 @@ namespace autocad_mcp_plugin.AutoCAD
                     label:   "Stop MCP",
                     tooltip: "Stop the DeepBim MCP Server (MCPSTOP)",
                     command: "MCPSTOP",
-                    color:   Colors.OrangeRed));
+                    kind:    "stop"));
 
                 panelSource.Items.Add(rowStart);
                 panelSource.Items.Add(new RibbonSeparator());
@@ -73,7 +72,7 @@ namespace autocad_mcp_plugin.AutoCAD
                     label:   "Settings",
                     tooltip: "Open Command Settings (MCPSETTINGS)",
                     command: "MCPSETTINGS",
-                    color:   Colors.SlateGray,
+                    kind:    "settings",
                     size:    RibbonItemSize.Large));
 
                 panelSource.Items.Add(new RibbonSeparator());
@@ -84,7 +83,7 @@ namespace autocad_mcp_plugin.AutoCAD
                     label:   "MCP Status",
                     tooltip: "Show MCP Server status (MCPSTATUS)",
                     command: "MCPSTATUS",
-                    color:   Colors.DodgerBlue,
+                    kind:    "status",
                     size:    RibbonItemSize.Large));
             }
             catch (System.Exception ex)
@@ -100,42 +99,22 @@ namespace autocad_mcp_plugin.AutoCAD
 
         private static RibbonButton MakeButton(
             string id, string label, string tooltip,
-            string command, Color color,
+            string command, string kind,
             RibbonItemSize size = RibbonItemSize.Standard)
         {
             return new RibbonButton
             {
-                Id              = id,
-                Name            = id,
-                Text            = label,
-                ToolTip         = new RibbonToolTip
-                {
-                    Title   = label,
-                    Content = tooltip
-                },
-                CommandHandler  = new RibbonCommandHandler(command),
-                LargeImage      = CreateColorIcon(color, 32),
-                Image           = CreateColorIcon(color, 16),
-                Size            = size,
-                Orientation     = System.Windows.Controls.Orientation.Vertical,
-                ShowText        = true
+                Id             = id,
+                Name           = id,
+                Text           = label,
+                ToolTip        = new RibbonToolTip { Title = label, Content = tooltip },
+                CommandHandler = new RibbonCommandHandler(command),
+                LargeImage     = RibbonIconHelper.GetLargeImage(kind),
+                Image          = RibbonIconHelper.GetSmallImage(kind),
+                Size           = size,
+                Orientation    = System.Windows.Controls.Orientation.Vertical,
+                ShowText       = true
             };
-        }
-
-        /// <summary>Creates a solid-color square bitmap as ribbon icon.</summary>
-        private static ImageSource CreateColorIcon(Color color, int size)
-        {
-            var bmp = new WriteableBitmap(size, size, 96, 96, System.Windows.Media.PixelFormats.Bgra32, null);
-            var pixels = new byte[size * size * 4];
-            for (int i = 0; i < size * size; i++)
-            {
-                pixels[i * 4 + 0] = color.B;
-                pixels[i * 4 + 1] = color.G;
-                pixels[i * 4 + 2] = color.R;
-                pixels[i * 4 + 3] = color.A;
-            }
-            bmp.WritePixels(new System.Windows.Int32Rect(0, 0, size, size), pixels, size * 4, 0);
-            return bmp;
         }
     }
 

@@ -33,9 +33,11 @@ namespace autocad_mcp_plugin.UI
             UpdateClip();
             try
             {
-                var uri = new System.Uri("pack://application:,,,/AutoCADMCPPlugin;component/Resources/icon.png", System.UriKind.Absolute);
-                TitleBarIcon.Source = BitmapFrame.Create(uri);
-                Icon = BitmapFrame.Create(uri);
+                // deepbim-logo-56 for title bar icon and window taskbar icon
+                var logoUri = new System.Uri("pack://application:,,,/AutoCADMCPPlugin;component/Resources/deepbim-logo-56.png", System.UriKind.Absolute);
+                var logoFrame = BitmapFrame.Create(logoUri);
+                TitleBarIcon.Source = logoFrame;
+                Icon = logoFrame;
             }
             catch { /* icon optional */ }
         }

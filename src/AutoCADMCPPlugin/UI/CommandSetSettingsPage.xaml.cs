@@ -184,9 +184,8 @@ namespace autocad_mcp_plugin.UI
 
                 if (_commandSets.Count == 0)
                 {
-                    MessageBox.Show(
-                        "No command sets found.\n\nExpected: command.json next to the plugin DLL or in the Commands sub-folder.",
-                        "No Command Sets", MessageBoxButton.OK, MessageBoxImage.Information);
+                    NoSelectionTextBlock.Text = "No command sets found.\n\nExpected: command.json next to the plugin DLL\nor in the Commands sub-folder.";
+                    NoSelectionTextBlock.Visibility = Visibility.Visible;
                 }
             }
             catch (Exception ex)

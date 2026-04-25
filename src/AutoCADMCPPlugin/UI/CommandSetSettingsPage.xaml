@@ -50,11 +50,21 @@
 
         <!-- Header -->
         <Border Grid.Row="0" Background="#59DCCB" CornerRadius="8" Padding="16,12" Margin="0,0,0,16">
-            <StackPanel>
-                <TextBlock Text="Command Settings" FontSize="20" FontWeight="SemiBold" Foreground="White"/>
-                <TextBlock Text="Enable or disable MCP commands available in AutoCAD."
-                           Foreground="#E6FCFA" FontSize="12" Margin="0,4,0,0" TextWrapping="Wrap" Opacity="0.95"/>
-            </StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0"
+                       Source="pack://application:,,,/AutoCADMCPPlugin;component/Resources/deepbim-logo-56.png"
+                       Width="36" Height="36" Stretch="Uniform"
+                       VerticalAlignment="Center" Margin="0,0,12,0"/>
+                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                    <TextBlock Text="Command Settings" FontSize="20" FontWeight="SemiBold" Foreground="White"/>
+                    <TextBlock Text="Enable or disable MCP commands available in AutoCAD."
+                               Foreground="#E6FCFA" FontSize="12" Margin="0,4,0,0" TextWrapping="Wrap" Opacity="0.95"/>
+                </StackPanel>
+            </Grid>
         </Border>
 
         <Grid Grid.Row="1" Margin="0,0,0,16">

@@ -27,7 +27,11 @@ namespace autocad_mcp_plugin.AutoCAD
                 {
                     string dir = Path.GetDirectoryName(location);
                     if (!string.IsNullOrEmpty(dir) && Directory.Exists(dir))
+                    {
                         PathManager.SetPluginDirectory(dir);
+                        // Auto-extract bundled command.json if not yet present
+                        EnsureCommandJson(dir);
+                    }
                 }
 
                 var logger = new Logger();
@@ -73,6 +77,27 @@ namespace autocad_mcp_plugin.AutoCAD
             {
                 if (SocketService.Instance.IsRunning)
                     SocketService.Instance.Stop();
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Extracts the embedded command.json from the DLL to the plugin directory
+        /// so that CommandSetSettingsPage can find it on first run.
+        /// </summary>
+        private static void EnsureCommandJson(string pluginDir)
+        {
+            string target = Path.Combine(pluginDir, "command.json");
+            if (File.Exists(target)) return;
+            try
+            {
+                var asm = Assembly.GetExecutingAssembly();
+                using (var stream = asm.GetManifestResourceStream("command.json"))
+                {
+                    if (stream == null) return;
+                    using (var reader = new StreamReader(stream))
+                        File.WriteAllText(target, reader.ReadToEnd());
+                }
             }
             catch { }
         }

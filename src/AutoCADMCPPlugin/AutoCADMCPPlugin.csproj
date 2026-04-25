@@ -60,6 +60,16 @@
     <Resource Include="Resources\deepbim-logo.png"/>
     <Resource Include="Resources\deepbim-logo-56.png"/>
     <Resource Include="Resources\deepbim-logo-512.png"/>
+    <Resource Include="Resources\setting-icon-32x32px.png"/>
+    <Resource Include="Resources\setting-icon-64x64px.png"/>
+    <Resource Include="Resources\status-icon-64x64.png"/>
     <Resource Include="Resources\Styles\Styles.xaml"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- command.json embedded in DLL so it can be auto-extracted to the plugin folder on first run -->
+    <EmbeddedResource Include="..\..\command.json">
+      <LogicalName>command.json</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

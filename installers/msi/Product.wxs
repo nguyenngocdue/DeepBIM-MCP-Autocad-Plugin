@@ -94,6 +94,10 @@
       <Component Id="Comp_Plugin_NewtonsoftJson" Guid="*">
         <File Source="$(var.PluginBinDir)\Newtonsoft.Json.dll" KeyPath="yes" />
       </Component>
+      <!-- command.json: defines available MCP commands; read by the Settings UI -->
+      <Component Id="Comp_CommandJson" Guid="*">
+        <File Source="..\..\command.json" KeyPath="yes" />
+      </Component>
     </ComponentGroup>
 
     <!-- PackageContents.xml tells AutoCAD to auto-load the plugin on startup -->
@@ -154,6 +158,10 @@
     <!-- UI                                                                -->
     <!-- ================================================================ -->
 
+    <!--
+      WixUI_InstallDir shows: Welcome → License Agreement → InstallDir → Progress → Finish
+      WixUILicenseRtf must be defined to enable the License Agreement dialog.
+    -->
     <ui:WixUI Id="WixUI_InstallDir" InstallDirectory="INSTALLFOLDER" />
 
     <!-- ================================================================ -->
@@ -164,6 +172,9 @@
     <WixVariable Id="WixUIBannerBmp"  Value="branding\WixUIBanner.png" />
     <!-- Dialog background: shown on Welcome / Finish dialogs (493 × 312 px) -->
     <WixVariable Id="WixUIDialogBmp" Value="branding\WixUIDialog.png" />
+
+    <!-- License agreement RTF — shown on the License Agreement dialog -->
+    <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
 
     <!-- Add/Remove Programs icon -->
     <Icon Id="ProductIcon" SourceFile="..\..\src\AutoCADMCPPlugin\Resources\deepbim-logo-512.png" />
