@@ -4,8 +4,11 @@ Connect AutoCAD with AI assistants via MCP over TCP/HTTP, enabling drawing inspe
 
 
 ---
+### DeepBIM MCP
 
-## Screenshots
+This screen shows the DeepBIM MCP interface after the plugin has been installed successfully.
+
+![DeepBIM MCP](<public/DeepBim MCP.png>)
 
 ### Connect AutoCAD
 
@@ -18,12 +21,6 @@ This screen guides users through creating the connection between AutoCAD and Cha
 The dashboard is the MCP interface for monitoring and managing the active AutoCAD MCP connection.
 
 ![Dashboard](<public/Dashboard.png>)
-
-### DeepBIM MCP
-
-This screen shows the DeepBIM MCP interface after the plugin has been installed successfully.
-
-![DeepBIM MCP](<public/DeepBim MCP.png>)
 
 ---
 
