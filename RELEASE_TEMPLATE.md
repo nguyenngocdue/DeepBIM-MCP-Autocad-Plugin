@@ -79,12 +79,12 @@ https://autocad-mcp.deepbim.app/mcp
 
 | Mode | Best For | Configuration |
 | --- | --- | --- |
-| **ChatGPT Online MCP** | Community users who want a simple setup and lower usage cost | `https://autocad-mcp.deepbim.app/mcp` |
+| **ChatGPT Online MCP** | Community users who want a simple setup and lower usage cost | ChatGPT app uses `https://autocad-mcp.deepbim.app/mcp`; the AutoCAD machine exposes local HTTP `localhost:9180` through Cloudflare Tunnel |
 | **Local MCP Server** | Local desktop workflows, private network use, custom MCP clients | `node "C:\Program Files\DeepBim\AutoCAD-MCP\server\build\index.js"` |
 
 ### Recommended Option
 
-For most community users, **ChatGPT Online MCP** is recommended because it does not require manually running or configuring a local MCP server.
+For most community users, **ChatGPT Online MCP** is recommended because it does not require running the Node.js local MCP server. The AutoCAD machine still needs the plugin loaded and a Cloudflare Tunnel connected to local HTTP port `9180`.
 
 For developers and enterprise users, **Local MCP Server** is recommended when drawings or workflows must remain inside a private environment.
 
@@ -98,6 +98,7 @@ For developers and enterprise users, **Local MCP Server** is recommended when dr
 - .NET 8 Desktop Runtime for AutoCAD 2025-2026.
 - .NET runtime required by AutoCAD 2027.
 - Node.js LTS installed and available as `node` in PATH.
+- `cloudflared` installed on the machine running AutoCAD, if using ChatGPT Online MCP over HTTP tunnel.
 - Administrator permission to install the MSI.
 - ChatGPT account with Apps support, if using the hosted online MCP endpoint.
 
@@ -155,18 +156,69 @@ MCPSTATUS
 
 Use this option if you want to connect ChatGPT to AutoCAD through the hosted DeepBim MCP endpoint.
 
-This is the easiest setup for community users because you do not need to manually run a local MCP server.
+This mode uses the AutoCAD plugin's local HTTP endpoint and a Cloudflare Tunnel. ChatGPT connects to the hosted DeepBim MCP endpoint, and the hosted endpoint reaches the user's AutoCAD machine through the registered tunnel URL.
+
+Important: ChatGPT can access AutoCAD only after the local machine is ready. AutoCAD must be open, the DeepBim AutoCAD MCP plugin must be loaded, the local HTTP server must be running on port `9180`, and the current Cloudflare Tunnel URL must be registered at `https://autocad-mcp.deepbim.app/connect`.
 
 ### Steps
 
-1. Install the MSI package for your AutoCAD version.
-2. Restart AutoCAD.
-3. For AutoCAD 2025-2027, run `NETLOAD` and select `C:\Program Files\Autodesk\ApplicationPlugins\DeepBimAutoCADMCP.bundle\Contents\AutoCADMCPPlugin.dll` if `MCPSTATUS` is not recognized.
-4. Open ChatGPT.
-5. Go to `Settings`.
-6. Open `Apps`.
-7. Select `Create app`.
-8. Fill in the app information:
+1. Install `cloudflared` on the machine running AutoCAD:
+
+```powershell
+winget install Cloudflare.cloudflared
+```
+
+2. Install the MSI package for your AutoCAD version.
+3. Restart AutoCAD.
+4. For AutoCAD 2025-2027, run `NETLOAD` and select:
+
+```text
+C:\Program Files\Autodesk\ApplicationPlugins\DeepBimAutoCADMCP.bundle\Contents\AutoCADMCPPlugin.dll
+```
+
+5. In AutoCAD, run:
+
+```text
+MCPSTART
+```
+
+6. Verify that the status output shows HTTP port `9180`:
+
+```text
+MCPSTATUS
+```
+
+7. In a terminal on the AutoCAD machine, start the Cloudflare Tunnel:
+
+```powershell
+cloudflared tunnel --url http://localhost:9180
+```
+
+8. Copy the generated public URL, for example:
+
+```text
+https://xxxx.trycloudflare.com
+```
+
+9. Open:
+
+```text
+https://autocad-mcp.deepbim.app/connect
+```
+
+10. Paste the Cloudflare Tunnel URL and click `Connect`.
+11. Wait until the page shows:
+
+```text
+Connected! AutoCAD URL updated successfully.
+```
+
+12. Keep AutoCAD open and keep the `cloudflared` terminal running.
+13. Open ChatGPT.
+14. Go to `Settings`.
+15. Open `Apps`.
+16. Select `Create app`.
+17. Fill in the app information:
 
 | Field | Value |
 | --- | --- |
@@ -176,15 +228,19 @@ This is the easiest setup for community users because you do not need to manuall
 | MCP Server URL | `https://autocad-mcp.deepbim.app/mcp` |
 | Authentication | `No Auth` |
 
-9. Save the app.
-10. Enable the app in ChatGPT.
-11. In AutoCAD, run:
+18. Save the app.
+19. Enable the app in ChatGPT.
+20. In AutoCAD, run:
 
 ```text
 MCPSTATUS
 ```
 
 If the plugin is loaded correctly, AutoCAD will show the MCP server status and port information.
+
+After the Cloudflare Tunnel URL is registered at `https://autocad-mcp.deepbim.app/connect`, the page shows `Connected! AutoCAD URL updated successfully.`, and `MCPSTATUS` shows the plugin is running, ChatGPT can call the hosted MCP endpoint and reach the active AutoCAD session through HTTP.
+
+Every time the Cloudflare Tunnel is restarted, a new `trycloudflare.com` URL is generated. Paste the new URL into `https://autocad-mcp.deepbim.app/connect`, click `Connect`, and wait for `Connected! AutoCAD URL updated successfully.` again.
 
 > Authentication is not implemented yet. Select `No Auth` when creating the ChatGPT app.
 
