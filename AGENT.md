@@ -49,4 +49,5 @@ Autodesk AutoCAD 2024
 1. Build C# plugin: `dotnet build autocad-addin/src/AutoCADMCPPlugin/AutoCADMCPPlugin.csproj`
 2. Open AutoCAD 2024 → `NETLOAD` → select `bin\Debug\net48\AutoCADMCPPlugin.dll`
 3. Type `MCPSTART` (or it auto-starts on load)
-4. VS Code: the `autocad` MCP server in `.vscode/mcp.json` connects automatically
+4. Run `MCPSTATUS` to verify the plugin status
+5. VS Code: the `autocad` MCP server in `.vscode/mcp.json` connects automatically

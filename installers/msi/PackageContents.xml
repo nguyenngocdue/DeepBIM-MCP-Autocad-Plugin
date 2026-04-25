@@ -10,8 +10,8 @@
     - C:\ProgramData\Autodesk\ApplicationPlugins\   (all users, this installer)
     - %APPDATA%\Autodesk\ApplicationPlugins\         (current user)
   
-  SeriesMin="R23.1" = AutoCAD 2020
-  SeriesMax is omitted to support AutoCAD 2020 and later
+  SeriesMin="R22.0" = AutoCAD 2018
+  SeriesMax is omitted to support AutoCAD 2018 and later
 -->
 <ApplicationPackage SchemaVersion="1.0"
                     Version="1.0.0"
@@ -22,10 +22,10 @@
 
   <CompanyDetails Name="DeepBim" URL="" Email="" />
 
-  <RuntimeRequirements OS="Win64" Platform="AutoCAD" SeriesMin="R23.1" />
+  <RuntimeRequirements OS="Win64" Platform="AutoCAD" SeriesMin="R22.0" />
 
   <Components Description="DeepBim AutoCAD MCP Plugin">
-    <RuntimeRequirements OS="Win64" Platform="AutoCAD" SeriesMin="R23.1" />
+    <RuntimeRequirements OS="Win64" Platform="AutoCAD" SeriesMin="R22.0" />
     <ComponentEntry AppName="DeepBimAutoCADMCP"
                     Version="1.0.0"
                     ModuleName="./Contents/AutoCADMCPPlugin.dll"

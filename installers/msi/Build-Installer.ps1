@@ -16,12 +16,12 @@
 
 .PARAMETER AutoCADVersion
     AutoCAD release year(s) embedded in the MSI name and package title.
-    Supports a single year, comma-separated years, or a range from 2020 to 2027.
+    Supports a single year, comma-separated years, or a range from 2018 to 2027.
     Default: 2025
 
 .PARAMETER AutoCADInstallDir
     Optional AutoCAD install folder used to build the C# plugin references.
-    Example: C:\Program Files\Autodesk\AutoCAD 2020
+    Example: C:\Program Files\Autodesk\AutoCAD 2018
 
 .PARAMETER SkipBuild
     Skip steps 1-2 (use existing build output).
@@ -35,8 +35,8 @@
 .EXAMPLE
     .\Build-Installer.ps1
     .\Build-Installer.ps1 -ProductVersion 1.2.0 -AutoCADVersion 2025
-    .\Build-Installer.ps1 -ProductVersion 1.2.0 -AutoCADVersion 2020,2024,2027
-    .\Build-Installer.ps1 -ProductVersion 1.2.0 -AutoCADVersion 2020-2027 -SkipBuild
+    .\Build-Installer.ps1 -ProductVersion 1.2.0 -AutoCADVersion 2018,2024,2027
+    .\Build-Installer.ps1 -ProductVersion 1.2.0 -AutoCADVersion 2018-2027 -SkipBuild
 #>
 param(
     [string]$ProductVersion  = "1.0.0",
@@ -57,8 +57,8 @@ function Expand-AutoCADVersions {
     $seen = @{}
 
     function Add-Version([int]$Version) {
-        if ($Version -lt 2020 -or $Version -gt 2027) {
-            throw "AutoCADVersion '$Version' is outside the supported range 2020-2027."
+        if ($Version -lt 2018 -or $Version -gt 2027) {
+            throw "AutoCADVersion '$Version' is outside the supported range 2018-2027."
         }
 
         $key = $Version.ToString()
@@ -77,7 +77,7 @@ function Expand-AutoCADVersions {
                 [int]$startVersion = $Matches[1]
                 [int]$endVersion = $Matches[2]
                 if ($startVersion -gt $endVersion) {
-                    throw "AutoCADVersion range '$value' is invalid. Use ascending ranges like 2020-2027."
+                    throw "AutoCADVersion range '$value' is invalid. Use ascending ranges like 2018-2027."
                 }
 
                 foreach ($version in $startVersion..$endVersion) {
@@ -88,7 +88,7 @@ function Expand-AutoCADVersions {
                 Add-Version ([int]$value)
             }
             else {
-                throw "Invalid AutoCADVersion value '$value'. Use 2027, 2020,2024,2027, or 2020-2027."
+                throw "Invalid AutoCADVersion value '$value'. Use 2027, 2018,2024,2027, or 2018-2027."
             }
         }
     }

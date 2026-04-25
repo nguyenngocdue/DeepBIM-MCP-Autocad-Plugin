@@ -17,18 +17,18 @@ Output: `installers\msi\output\DeepBimMCP-AutoCAD2024-v1.0.0.msi`
 
 > `AutoCADVersion` có thể là `2024`, `2025`, `2026`, ... (default: `2025`). Các file MSI khác tên trong `installers\msi\output` sẽ được giữ lại.
 
-Build bằng script có thể nhập một version, danh sách version, hoặc cả range `2020-2027`:
+Build bằng script có thể nhập một version, danh sách version, hoặc cả range `2018-2027`:
 
 ```powershell
 .\installers\msi\Build-Installer.ps1 -AutoCADVersion 2027
-.\installers\msi\Build-Installer.ps1 -AutoCADVersion 2020,2024,2027
-.\installers\msi\Build-Installer.ps1 -AutoCADVersion 2020-2027
+.\installers\msi\Build-Installer.ps1 -AutoCADVersion 2018,2024,2027
+.\installers\msi\Build-Installer.ps1 -AutoCADVersion 2018-2027
 ```
 
 Nếu muốn build DLL theo bộ AutoCAD API thấp nhất để dùng chung cho nhiều bản, truyền thêm `AutoCADInstallDir`:
 
 ```powershell
-.\installers\msi\Build-Installer.ps1 -AutoCADVersion 2020-2027 -AutoCADInstallDir "C:\Program Files\Autodesk\AutoCAD 2020"
+.\installers\msi\Build-Installer.ps1 -AutoCADVersion 2018-2027 -AutoCADInstallDir "C:\Program Files\Autodesk\AutoCAD 2018"
 ```
 
 ## 3. Install
@@ -52,8 +52,8 @@ After installing, update `.vscode/mcp.json`:
 # Full pipeline (build C# + server + MSI)
 .\installers\msi\Build-Installer.ps1 -AutoCADVersion 2025
 
-# Build all MSI versions from AutoCAD 2020 to 2027
-.\installers\msi\Build-Installer.ps1 -AutoCADVersion 2020-2027
+# Build all MSI versions from AutoCAD 2018 to 2027
+.\installers\msi\Build-Installer.ps1 -AutoCADVersion 2018-2027
 
 # Uninstall
 msiexec /x "installers\msi\output\DeepBimMCP-AutoCAD2024-v1.0.0.msi" /qn

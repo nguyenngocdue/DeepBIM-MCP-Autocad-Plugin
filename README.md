@@ -84,8 +84,8 @@ The output DLL will be at `bin\Debug\net48\AutoCADMCPPlugin.dll`.
 
 1. Open AutoCAD 2025 (or your version)
 2. Type `NETLOAD` in the command line
-3. Browse to `AutoCADMCPPlugin.dll`
-4. The plugin initializes automatically and starts the MCP server
+3. Browse to `AutoCADMCPPlugin.dll` (the plugin initializes automatically and starts the MCP server)
+4. Run `MCPSTATUS` to verify the plugin status
 
 Alternatively, add to `acad.lsp` or your startup profile for auto-load:
 ```lisp
