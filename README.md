@@ -1,4 +1,4 @@
-# DeepBIM-MCP Plugin
+# DeepBIM-MCP Autocad Plugin
 
 Connect AutoCAD with AI assistants via MCP over TCP/HTTP, enabling drawing inspection, project data access, and supported AutoCAD automation.
 
