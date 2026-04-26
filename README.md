@@ -62,6 +62,18 @@ AutoCADMCPPlugin/
 
 ## Prerequisites
 
+## Checked AutoCAD Versions
+
+The plugin has currently only been checked with the following AutoCAD versions:
+
+| AutoCAD Version | Check Status | Notes |
+|-----------------|--------------|-------|
+| AutoCAD 2022 | Checked | Initial compatibility check completed |
+| AutoCAD 2024 | Checked | Initial compatibility check completed |
+| AutoCAD 2027 | Checked | Initial compatibility check completed |
+
+> **Note:** Other AutoCAD versions have not been confirmed yet.
+
 ### AutoCAD SDK DLLs
 
 This project requires AutoCAD .NET managed DLLs. They are **not on NuGet** — you must reference them from your AutoCAD installation:
